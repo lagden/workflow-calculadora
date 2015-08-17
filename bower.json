@@ -1,0 +1,7 @@
+{
+  "name": "calculadora",
+  "private": true,
+  "dependencies": {
+    "fabric": "~1.5.0"
+  }
+}

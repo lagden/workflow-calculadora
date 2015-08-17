@@ -1,0 +1,34 @@
+{
+  "name": "calc",
+  "version": "1.0.0",
+  "description": "Apenas uma calculadora",
+  "main": "calculadora.js",
+  "keywords": [
+    "calculadora"
+  ],
+  "scripts": {
+    "prestart": "xo && browserify -d -e src/main.js -o dev/js/main.js -t [babelify --stage 1 --only src]",
+    "start": "ws -p 8283 -d dev",
+    "test": "xo"
+  },
+  "xo": {
+    "envs": ["es6"],
+    "esnext": true,
+    "ignores": [
+    	"dev/js/**",
+    	"vendor/**"
+    ],
+    "rules": {
+    	"arrow-parens": [1, "always"]
+    }
+  },
+  "author": "Thiago Lagden",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.1",
+    "local-web-server": "^0.5.22",
+    "xo": "^0.6.0"
+  }
+}
