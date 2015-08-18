@@ -1,3 +1,4 @@
+/* global window */
 'use strict';
 
 import {fabric} from '../vendor/lib/fabric/dist/fabric';
@@ -13,17 +14,23 @@ console.log(`6  + sum(50, 4)      ---> 50 + 4       = 60`);
 console.log(`60 - less(5, 55, 10) ---> 5 - 55 - 10  = ${r.number}`);
 
 // Fabric Stuff
-const canvas = new fabric.Canvas('calcCanvas', {
-	backgroundColor: 'rgb(200,200,200)'
-});
+function retina(canvas) {
+	if (window.devicePixelRatio !== 1) {
+		const c = canvas.getElement();
+		const w = c.width;
+		const h = c.height;
+		c.setAttribute('width', w * window.devicePixelRatio);
+		c.setAttribute('height', h * window.devicePixelRatio);
+		c.getContext('2d').scale(window.devicePixelRatio, window.devicePixelRatio);
+	}
+}
 
-const rect = new fabric.Rect({
-	width: 100,
-	height: 100,
-	left: 50,
-	top: 50,
-	fill: 'blue',
-	angle: 30
-});
+const backgroundColor = 'rgb(200,200,200)';
+const canvas = new fabric.StaticCanvas('calcCanvas', {backgroundColor});
+retina(canvas);
 
-canvas.add(rect);
+const [width, height, top, left, angle, fill] = [100, 100, 50, 50, 30, 'red'];
+const rectA = new fabric.Rect({width, height, left, top, angle, fill: 'blue'});
+const rectB = new fabric.Rect({width, height, left: 200, top, angle, fill});
+
+canvas.add(rectA, rectB);
